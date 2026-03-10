@@ -23,5 +23,13 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(user_bp, url_prefix="/api/users")
     app.register_blueprint(request_bp, url_prefix="/api/requests")
+    
+    @app.route("/api/health", methods=["GET"])
+    def health_check():
+       return {
+          "status": "ok",
+          "service": "Automobile Breakdown Backend"
+        }  
+
 
     return app
