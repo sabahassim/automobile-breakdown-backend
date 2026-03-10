@@ -1,8 +1,16 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
-from app import db
 from app.models import User
-import bcrypt
+from app import db
+
+auth_bp = Blueprint("auth", __name__)
+
+
+@auth_bp.route("/test", methods=["GET"])
+def auth_test():
+    return jsonify({
+          "message": "Auth route working"
+    })
 
 auth_bp = Blueprint("auth", __name__)
 
