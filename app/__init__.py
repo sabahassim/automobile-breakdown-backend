@@ -19,10 +19,13 @@ def create_app():
     from app.routes.auth_routes import auth_bp
     from app.routes.user_routes import user_bp
     from app.routes.request_routes import request_bp
+    from app.routes.provider_routes import provider_bp
+    
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(user_bp, url_prefix="/api/users")
     app.register_blueprint(request_bp, url_prefix="/api/requests")
+    app.register_blueprint(provider_bp, url_prefix="/api/providers")
     
     @app.route("/api/health", methods=["GET"])
     def health_check():

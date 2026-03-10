@@ -36,3 +36,19 @@ class ServiceRequest(db.Model):
             "user_id": self.user_id,
             "status": self.status
         }
+        
+class ServiceProvider(db.Model):
+    __tablename__ = "service_providers"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    phone = db.Column(db.String(20), nullable=False)
+    location = db.Column(db.String(100), nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "phone": self.phone,
+            "location": self.location
+        }
