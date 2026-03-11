@@ -6,7 +6,6 @@ app = create_app()
 def home():
     return "Backend running!"
 
-# Create database tables automatically
 with app.app_context():
     db.create_all()
 
