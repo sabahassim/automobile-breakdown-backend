@@ -44,7 +44,6 @@ def create_request():
 def get_my_requests():
     user_id = get_jwt_identity()
 
-    # Get requests for the logged-in user (latest first)
     requests = ServiceRequest.query.filter_by(user_id=user_id) \
         .order_by(ServiceRequest.id.desc()) \
         .all()
@@ -59,6 +58,8 @@ def get_my_requests():
         "requests": [req.to_dict() for req in requests]
     })
 
+
+# UPDATE REQUEST STATUS
 @request_bp.route("/update-status/<int:request_id>", methods=["PUT"])
 @jwt_required()
 def update_request_status(request_id):
@@ -80,4 +81,15 @@ def update_request_status(request_id):
     return jsonify({
         "message": "Request status updated",
         "request": service_request.to_dict()
+    })
+
+
+# GET ALL REQUESTS (ADMIN / PROVIDERS)
+@request_bp.route("/all", methods=["GET"])
+def get_all_requests():
+    requests = ServiceRequest.query.all()
+
+    return jsonify({
+        "count": len(requests),
+        "requests": [req.to_dict() for req in requests]
     })
